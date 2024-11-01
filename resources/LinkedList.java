@@ -1,7 +1,6 @@
-package code;
 public class LinkedList<T> {
 
-	private static class Node<T> {
+  private static class Node<T> {
 		T data;
 		Node<T> next;
 
@@ -76,6 +75,4 @@ public class LinkedList<T> {
 
 		current = (current.next == null) ? head : current.next;
 	}
-
-	
 }
