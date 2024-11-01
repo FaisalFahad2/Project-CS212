@@ -77,7 +77,7 @@ public class prepare {
       String doc[] = new String [50];
       
       for(int i = 0; i < doc.length; i++){
-        String line = reader.readLine().substring(3);
+        String line = reader.readLine().substring(2);
         String filtered = "";
 
         String str [] = line.split(" ");
