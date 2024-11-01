@@ -75,4 +75,15 @@ public class LinkedList<T> {
 
 		current = (current.next == null) ? head : current.next;
 	}
+  
+  public boolean contain(T data){
+    Node<T> c = head;
+
+    while (c != null) {
+      if(c.data.equals(data))
+        return true;
+      c = c.next;
+    }
+    return false;
+  }
 }
