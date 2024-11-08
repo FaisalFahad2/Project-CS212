@@ -1,11 +1,11 @@
 public class LinkedBST<T> {
   
 	private static class BSTNode<T> {
-		int key;
+		String key;
 		T data;
 		BSTNode<T> left, right;
 
-		public BSTNode(int key, T data) {
+		public BSTNode(String key, T data) {
 			this.key = key;
 			this.data = data;
 			left = right = null;
@@ -30,13 +30,13 @@ public class LinkedBST<T> {
 		return current.data;
 	}
 
-	public boolean findKey(int k) {
+	public boolean findKey(String k) {
 		BSTNode<T> n = root;
 		while (n != null) {
 			current = n;
-			if (k == n.key)
+			if (k.equals(n.key))
 				return true;
-			else if (k < n.key)
+			else if (k.compareTo(n.key) < 0)
 				n = n.left;
 			else
 				n = n.right;
@@ -45,28 +45,22 @@ public class LinkedBST<T> {
 		return false;
 	}
 
-	public boolean update(int k, T data) {
-		if (!findKey(k))
-			return false;
-		
+	public void update(T data) {
 		current.data = data;
-		return true;
+		
 	}
 
-	public boolean insert(int k, T data) {
+	public boolean insert(String k, T data) {
 		if (root == null) {
 			current = root = new BSTNode<T>(k, data);
 			return true;
 		}
 		
-		BSTNode<T> n = current;
-		if (findKey(k)) {
-			current = n;
+		if (findKey(k)) 
 			return false;
-		}
 		
 		BSTNode<T> newNode = new BSTNode<T>(k, data);
-		if (k < current.key)
+		if (k.compareTo(current.key) < 0)
 			current.left = newNode;
 		else 
 			current.right = newNode;
@@ -77,14 +71,14 @@ public class LinkedBST<T> {
 	}
 
 
-	public boolean remove(int k) {
+	public boolean remove(String k) {
 		BSTNode<T> n = root, p = null;
 		while (n != null) {
-			if (k < n.key) {
+			if (k.compareTo(n.key) < 0) {
 				p = n;
 				n = n.left;
 			} 
-			else if (k > n.key) {
+			else if (k.compareTo(n.key) > 0) {
 				p = n;
 				n = n.right;
 			}
@@ -112,7 +106,7 @@ public class LinkedBST<T> {
 				if (p == null)
 					root = c;
 				else {
-					if (n.key < p.key)
+					if (n.key.compareTo(p.key) < 0)
 						p.left = c;
 					else
 						p.right = c;
@@ -125,64 +119,35 @@ public class LinkedBST<T> {
 		return false;
 	}
 	
-	public void deleteSubtree(){
-		if (current == root){
-			current = root = null;
+
+	// try
+
+	void printTree() {
+		printTreeRec(root, 0);
+}
+
+// Helper function to print the tree structure
+void printTreeRec(BSTNode<T> root, int level) {
+		if (root == null) {
+				return;
 		}
-		else {
-			BSTNode<T> n = root, p = null;
-			while (n != current) {
-				p = n;
-				if (current.key < n.key)
-					n = n.left;
-				else
-					n = n.right;
-			}
-			
-			if (p.left == current)
-				p.left = null;
-			else 
-				p.right = null;
-			
-			current = root;
-		}
-	}
-	
-	public void traverse(Order o) {
-		switch(o) {
-			case PREORDER:
-				traversePreorder(root);
-				break;
-			case INORDER:
-				traverseInorder(root);
-				break;
-			case POSTORDER:
-				traversePostorder(root);
-				break;
-		}
+
+		// Print the root node with indentation
+		if (level != 0) {
+			for (int i = 0; i < level - 1; i++)
+					System.out.print("|\t");
+			System.out.println("|-------" + root.data + " " + root.key);
+	} else {
+			System.out.println(root.data + " " + root.key);
 	}
 
-	public void traversePreorder(BSTNode<T> n) {
-		if (n != null) {
-			System.out.print(n.data);
-			traversePreorder(n.left);
-			traversePreorder(n.right);
-		}
-	}
+		// Print right subtree first (so it appears at the top right)
+		printTreeRec(root.left, level + 1);
 
-	public void traverseInorder(BSTNode<T> n) {
-		if (n != null) {
-			traverseInorder(n.left);
-			System.out.print(n.data);
-			traverseInorder(n.right);
-		}
-	}
+		
 
-	public void traversePostorder(BSTNode<T> n) {
-		if (n != null) {
-			traversePostorder(n.left);
-			traversePostorder(n.right);
-			System.out.print(n.data);
-		}
-	}
+		// Print left subtree
+		printTreeRec(root.right, level + 1);
+}
+
 }
