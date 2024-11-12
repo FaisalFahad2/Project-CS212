@@ -11,9 +11,13 @@ public class test {
       } catch (IOException e) {
         System.out.println("err");
       }
+      Index ind = new Index();
+      ind.fillIndex(a);
       InvertedIndexBST BST = new InvertedIndexBST();
       BST.fillBST(a);
-      BST.print();
+      System.out.println(ind.search("market"));
+      System.out.println(ind.search("changed"));
+      System.out.println(ind.search("a"));
       System.out.println(BST.search("market"));
       System.err.println(BST.search("changed"));
   }

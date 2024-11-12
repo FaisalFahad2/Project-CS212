@@ -1,41 +1,61 @@
 
 public class InvertedIndex {
-
 	private LinkedList<LinkedList> a = new LinkedList<LinkedList>();
 
 	public void fillIndex(String docs[]) {
+		int found;
+		LinkedList x;
+		boolean flag = false;
 
 		for (int i = 0; i < docs.length; i++) {
-			LinkedList IDs = new LinkedList<String>();
 			String[] words = docs[i].split(" ");
-
 			for (int j = 0; j < words.length; j++) {
+				flag = false;
+				LinkedList temp = new LinkedList<String>();
+		
+				a.findFirst();
+				for (int k = 0; k < a.size(); k++) {
+					x = a.retrieve();
+					x.findFirst();
 
-				IDs.insert(words[j]);
+					if (x.retrieve().equals(words[j])) {
+						x.insert(i);
+						a.update(x);
+						flag = true;
+					}
+					a.findNext();
+				}
+
+				if (flag == false) {
+					temp.insert(words[j]);
+					temp.insert(i);
+					a.findFirst();
+					a.insert(temp);
+				}
+
 			}
-			a.insert(IDs);
 
 		}
-
 	}
 
 	public String search(String k) {
 		StringBuilder foundIn = new StringBuilder();
 
 		a.findFirst();
-		for (int l = 0; l < a.size(); l++) {
-
+		for (int i = 0; i < a.size(); i++) {
 			LinkedList temp = a.retrieve();
 			temp.findFirst();
-
-			if (temp.contain(k))
-				foundIn.append(l + " ");
+			if (temp.retrieve().equals(k)) {
+				for (int j = 0; j < temp.size() - 1; j++) {
+					temp.findNext();
+					foundIn.append(temp.retrieve() + " ");
+				}
+				return foundIn.toString();
+			}
 			a.findNext();
 		}
+		return "Not found";
 
-		if (foundIn.toString().equals(""))
-			return "Not found";
-		return foundIn.toString();
 	}
 
 }

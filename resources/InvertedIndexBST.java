@@ -7,32 +7,21 @@ public class InvertedIndexBST {
       String words [] = docs[i].split(" ");
 
       for(int j = 0; j < words.length; j++){
-        if(!a.insert(words[j], " " + i))
+        if(!a.insert(words[j], "" + i))
           a.update(a.retrieve()+ " " + i);
       }
     }
   }
 
-  public String search(String k) {
-    
-    String or[] = k.split("OR");
-    for(int i = 0; i < or.length; i++){
-
-      String and[] = or[i].split("AND");
-
-      for (int j = 0; j < and.length; j++) {
-        
-        if(a.findKey(and[i]))
+  public String search(String k) {  
+        if(a.findKey(k))
           return a.retrieve();
         
           return "Not found";
-      }
-    }
   }
 
+  //test
   public void print(){
     a.printTree();
   }
-
-  
 }
