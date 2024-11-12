@@ -32,7 +32,7 @@ public class ranking {
       String docs [] = a.search(words[i]);
       
     }
-  }
+  } 
 
   public void rankInvertedIndex(String str){
 
