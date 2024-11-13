@@ -13,6 +13,7 @@ public class LinkedList<T> {
 
 	private Node<T> head;
 	private Node<T> current;
+	
 
 	
 	public LinkedList() {
@@ -86,13 +87,17 @@ public class LinkedList<T> {
     }
     return false;
   }
-   public int size() {
+
+  public int size() {
 	  Node<T> c = head;
 	  int count = 0;
 	  while (c != null) {
 		  count++;
-	  c = c.next;}
+	  c = c.next;
+	}
 	  return count;
 	  
 	}
+
+	
 }

@@ -13,13 +13,21 @@ public class test {
       }
       Index ind = new Index();
       ind.fillIndex(a);
+
       InvertedIndexBST BST = new InvertedIndexBST();
       BST.fillBST(a);
+
       System.out.println(ind.search("market"));
-      System.out.println(ind.search("changed"));
+      System.out.println(ind.search("sports"));
       System.out.println(ind.search("a"));
       System.out.println(BST.search("market"));
-      System.err.println(BST.search("changed"));
+      System.err.println(BST.search("sports"));
+
+      ranking r = new ranking(ind, null, BST);
+
+      System.out.println(r.rankIndex("market sports"));
+
+      
   }
 }
 
