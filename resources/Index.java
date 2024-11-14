@@ -39,4 +39,27 @@ public class Index {
 		return foundIn.toString();
 	}
 
+// search for ranking
+	public String searchWithDuplicated(String k) {
+		StringBuilder foundIn = new StringBuilder();
+
+		a.findFirst();
+		for (int l = 0; l < a.size(); l++) {
+
+			LinkedList temp = a.retrieve();
+			temp.findFirst();
+
+			for(int i = 0; i < temp.size(); i++){
+				if(temp.retrieve().equals(k))
+					foundIn.append(l + " ");
+				temp.findNext();
+			}
+			a.findNext();
+			
+		}
+
+		if (foundIn.toString().equals(""))
+			return "Not found";
+		return foundIn.toString();
+	}
 }

@@ -44,6 +44,10 @@ public class LinkedList<T> {
 		return current.data;
 	}
 
+	public T retrieveHead() {
+		return head.data;
+	}
+
 	public void update(T data) {
 		current.data = data;
 	}
