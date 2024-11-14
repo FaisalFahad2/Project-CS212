@@ -44,9 +44,18 @@ public class test {
     System.out.println(BST.searchWithDuplicated("market"));
     System.err.println(BST.searchWithDuplicated("sports"));
 
-    ranking r = new ranking(ind, null, BST);
+    ranking r = new ranking(ind, ivner, BST);
 
-   // System.out.println(r.rankIndex("market sports"));
+    System.out.println(r.rankIndex("market sports"));
+    System.out.println(r.rankIndex("weather warming"));
+    System.out.println(r.rankIndex("business world market"));
 
+    System.out.println(r.rankInvertedIndex("market sports"));
+    System.out.println(r.rankInvertedIndex("weather warming"));
+    System.out.println(r.rankInvertedIndex("business world market"));
+
+    System.out.println(r.rankInvertedIndexBST("market sports"));
+    System.out.println(r.rankInvertedIndexBST("weather warming"));
+    System.out.println(r.rankInvertedIndexBST("business world market"));
   }
 }
