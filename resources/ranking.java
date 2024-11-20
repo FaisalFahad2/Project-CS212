@@ -39,6 +39,7 @@ public class ranking {
       if(tmp == "Not found")
         break;
 
+    
       String docs[] = tmp.split(" ");
       for (int j = 0; j < docs.length; j++) {
         if(sorted.find(docs[j]))
@@ -87,7 +88,6 @@ public class ranking {
       result.append(String.format("%-12d %3d%n", Integer.parseInt(tmp.getData()), tmp.getPrio()));    
     }
     
-    
     return result.toString();
   }
 
@@ -122,5 +122,4 @@ public class ranking {
     return result.toString();
   }
 
-    
 }

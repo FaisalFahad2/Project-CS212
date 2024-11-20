@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Set;
 
 public class test {
   public static void main(String[] args) {
@@ -19,7 +20,11 @@ public class test {
     
     InvertedIndexBST BST = new InvertedIndexBST();
     BST.fillBST(a);
-    
+
+    hashMap hash = new hashMap(26);
+    hash.fillTableHash(a);
+
+
     System.out.println(ind.search("market"));
     System.out.println(ind.search("sports"));
     System.out.println(ind.searchWithDuplicated("sports"));
@@ -57,5 +62,20 @@ public class test {
     System.out.println(r.rankInvertedIndexBST("market sports"));
     System.out.println(r.rankInvertedIndexBST("weather warming"));
     System.out.println(r.rankInvertedIndexBST("business world market"));
+
+    System.out.println("hash");
+    System.out.println(hash.searchWithDuplicated("weather"));
+    System.out.println(hash.searchWithDuplicated("warming"));
+    System.out.println(hash.searchWithDuplicated("market"));
+    System.err.println(hash.searchWithDuplicated("sports"));
+    
+    System.out.println(hash.search("weather"));
+    System.out.println(hash.search("warming"));
+    System.out.println(hash.search("market"));
+    System.err.println(hash.search("sports"));
+
+    System.out.println(hash.search("x"));
+    
+    //hash.print();
   }
 }
