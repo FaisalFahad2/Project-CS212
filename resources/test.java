@@ -76,6 +76,6 @@ public class test {
 
     System.out.println(hash.search("x"));
     
-    //hash.print();
+    hash.print();
   }
 }
