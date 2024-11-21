@@ -29,7 +29,6 @@ public class prepare {
         count++;
         ch = line.charAt(0);
         words = new LinkedList<>();
-
       }
       words.insert(line);
 

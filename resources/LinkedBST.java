@@ -30,6 +30,7 @@ public class LinkedBST<T> {
 		return current.data;
 	}
 
+	// changed current for update in inverted BST
 	public boolean findKey(String k) {
 		BSTNode<T> n = root;
 		while (n != null) {
@@ -120,34 +121,24 @@ public class LinkedBST<T> {
 	}
 	
 
-	// try
-
+	// test
 	void printTree() {
 		printTreeRec(root, 0);
 }
 
-// Helper function to print the tree structure
-void printTreeRec(BSTNode<T> root, int level) {
+	void printTreeRec(BSTNode<T> root, int level) {
 		if (root == null) {
 				return;
 		}
 
-		// Print the root node with indentation
 		if (level != 0) {
 			for (int i = 0; i < level - 1; i++)
 					System.out.print("|\t");
 			System.out.println("|-------" + root.data + " " + root.key);
-	} else {
-			System.out.println(root.data + " " + root.key);
-	}
-
-		// Print right subtree first (so it appears at the top right)
+		} else {
+		System.out.println(root.data + " " + root.key);
+		}
 		printTreeRec(root.left, level + 1);
-
-		
-
-		// Print left subtree
 		printTreeRec(root.right, level + 1);
 }
-
 }

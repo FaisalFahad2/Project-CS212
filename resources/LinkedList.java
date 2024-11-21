@@ -13,11 +13,13 @@ public class LinkedList<T> {
 
 	private Node<T> head;
 	private Node<T> current;
+	private int size;
 	
 
 	
 	public LinkedList() {
 		head = current = null;
+		size = 0;
 	}
 
 	public boolean empty() {
@@ -44,6 +46,7 @@ public class LinkedList<T> {
 		return current.data;
 	}
 
+	//for inverted Index
 	public T retrieveHead() {
 		return head.data;
 	}
@@ -63,6 +66,7 @@ public class LinkedList<T> {
 			current.next = newNode;
 			current = newNode;
 		}
+		size++;
 	}
 
 	public void remove() {
@@ -79,6 +83,7 @@ public class LinkedList<T> {
 		}
 
 		current = (current.next == null) ? head : current.next;
+		size--;
 	}
   
   public boolean contain(T data){
@@ -93,14 +98,7 @@ public class LinkedList<T> {
   }
 
   public int size() {
-	  Node<T> c = head;
-	  int count = 0;
-	  while (c != null) {
-		  count++;
-	  c = c.next;
-	}
-	  return count;
-	  
+		return size;
 	}
 
 	

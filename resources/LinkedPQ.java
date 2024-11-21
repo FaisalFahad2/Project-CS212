@@ -77,5 +77,14 @@ public class LinkedPQ<T> {
 		
 		return new PQElement<T>(max.prio, max.data);
 	}
+
+	public PQElement<T> serveFromHead() {
+		PQElement<T> e = new PQElement<T>(head.prio, head.data);
+		
+		head = head.next;
+		count--;
+		
+		return e;
+	}
 	
 }

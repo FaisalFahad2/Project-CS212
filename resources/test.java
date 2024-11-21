@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Set;
 
 public class test {
   public static void main(String[] args) {
@@ -23,6 +22,7 @@ public class test {
 
     hashMap hash = new hashMap(26);
     hash.fillTableHash(a);
+
 
 
     System.out.println(ind.search("market"));
@@ -49,19 +49,23 @@ public class test {
     System.out.println(BST.searchWithDuplicated("market"));
     System.err.println(BST.searchWithDuplicated("sports"));
 
-    ranking r = new ranking(ind, ivner, BST);
+    ranking r = new ranking(ind, ivner, BST, hash);
 
-    System.out.println(r.rankIndex("market sports"));
-    System.out.println(r.rankIndex("weather warming"));
-    System.out.println(r.rankIndex("business world market"));
+    System.out.println(r.rank("market sports" , ranking.structure.index));
+    System.out.println(r.rank("weather warming", ranking.structure.index));
+    System.out.println(r.rank("business world market", ranking.structure.index));
 
-    System.out.println(r.rankInvertedIndex("market sports"));
-    System.out.println(r.rankInvertedIndex("weather warming"));
-    System.out.println(r.rankInvertedIndex("business world market"));
+    System.out.println(r.rank("market sports", ranking.structure.invertedIndex));
+    System.out.println(r.rank("weather warming", ranking.structure.invertedIndex));
+    System.out.println(r.rank("business world market", ranking.structure.invertedIndex));
 
-    System.out.println(r.rankInvertedIndexBST("market sports"));
-    System.out.println(r.rankInvertedIndexBST("weather warming"));
-    System.out.println(r.rankInvertedIndexBST("business world market"));
+    System.out.println(r.rank("market sports" ,ranking.structure.invertedIndexBST));
+    System.out.println(r.rank("weather warming" ,ranking.structure.invertedIndexBST));
+    System.out.println(r.rank("business world market" ,ranking.structure.invertedIndexBST));
+
+    System.out.println(r.rank("market sports" ,ranking.structure.hashMap));
+    System.out.println(r.rank("weather warming" ,ranking.structure.hashMap));
+    System.out.println(r.rank("business world market" ,ranking.structure.hashMap));
 
     System.out.println("hash");
     System.out.println(hash.searchWithDuplicated("weather"));
@@ -76,6 +80,6 @@ public class test {
 
     System.out.println(hash.search("x"));
     
-    hash.print();
+    //hash.print();
   }
 }

@@ -26,6 +26,7 @@ public class InvertedIndexBST {
     return "Not found";
   }
 
+  //for rank
   public String searchWithDuplicated(String k) {
     if (a.findKey(k))
       return a.retrieve();
