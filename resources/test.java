@@ -24,8 +24,9 @@ public class test {
     hash.fillTableHash(a);
 
 
-
-    System.out.println(ind.search("market"));
+    System.out.println(ind.search("business"));
+    System.out.println(ind.searchWithDuplicated("world"));
+    System.out.println(ind.searchWithDuplicated("market"));
     System.out.println(ind.search("sports"));
     System.out.println(ind.searchWithDuplicated("sports"));
     System.out.println(ind.search("a"));
@@ -79,7 +80,7 @@ public class test {
     System.err.println(hash.search("sports"));
 
     System.out.println(hash.search("x"));
-    
-    //hash.print();
+    System.out.println(r.rank("business a world market" ,ranking.structure.hashMap));
+
   }
 }

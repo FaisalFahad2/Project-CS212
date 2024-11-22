@@ -43,7 +43,7 @@ public class ranking {
       }
 
       if(tmp == "Not found")
-        break;
+        continue;
 
       String docs[] = tmp.split(" ");
       for (int j = 0; j < docs.length; j++) {
@@ -74,5 +74,4 @@ public class ranking {
     }
     return result.toString();
   }
-
 }
