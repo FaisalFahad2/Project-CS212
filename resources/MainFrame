@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class MainFrame extends JFrame {
 
@@ -51,7 +52,12 @@ public class MainFrame extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		String a[] = new String[0];
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 10, 833, 463);
+		contentPane.add(tabbedPane);
+		
+		    String a[] = new String[0];
     prepare p = new prepare(50);
     try {
       p.fillStop();
@@ -60,25 +66,20 @@ public class MainFrame extends JFrame {
     } catch (IOException e) {
       System.out.println("err");
     }
+    Index ind = new Index();
+    ind.fillIndex(a);
+    
+    InvertedIndex ivner = new InvertedIndex();
+    ivner.fillIndex(a);
+    
+    InvertedIndexBST BST = new InvertedIndexBST();
+    BST.fillBST(a);
 
-		Index ind = new Index();
-        ind.fillIndex(a);
-        
-        InvertedIndex ivner = new InvertedIndex();
-        ivner.fillIndex(a);
-        
-        InvertedIndexBST BST = new InvertedIndexBST();
-        BST.fillBST(a);
+    hashMap hash = new hashMap(26);
+    hash.fillTableHash(a);
 
-		hashMap hash = new hashMap(26);
-		hash.fillTableHash(a);
+	ranking r = new ranking(ind, ivner, BST, hash);
 
-		ranking r = new ranking(ind, ivner, BST, hash);
-
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 10, 833, 463);
-		contentPane.add(tabbedPane);
-		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Index", null, panel, null);
 		panel.setLayout(null);
@@ -94,10 +95,15 @@ public class MainFrame extends JFrame {
 		lblNewLabel.setBounds(10, 2, 279, 26);
 		panel.add(lblNewLabel);
 		
+		JLabel errorIndex = new JLabel("");
+		errorIndex.setForeground(new Color(255, 0, 0));
+		errorIndex.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		errorIndex.setBounds(10, 67, 200, 13);
+		panel.add(errorIndex);
+
 		JButton btnNewButton = new JButton("Boolean Retrieval"); //Index
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 			}
 		});
 		btnNewButton.setBounds(247, 37, 147, 21);
@@ -121,7 +127,12 @@ public class MainFrame extends JFrame {
 		JButton btnRankedRetrieval = new JButton("Ranked Retrieval"); //Index
 		btnRankedRetrieval.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textArea.setText(r.rank(textField.getText().toLowerCase(),ranking.structure.index));
+				String indexString = textField.getText().toLowerCase().trim();
+				if(!indexString.isBlank()){
+					textArea.setText(r.rank(indexString, ranking.structure.index));
+				}
+				else
+				errorIndex.setText("Please provide a nonempty input");
 			}
 		});
 		btnRankedRetrieval.setBounds(404, 37, 147, 21);
@@ -130,11 +141,18 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_2 = new JButton("Single Term Search"); //Index
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textArea.setText(ind.search(textField.getText().toLowerCase()));
+				String indexString = textField.getText().toLowerCase().trim();
+				if(!indexString.isBlank()){
+					textArea.setText(ind.search(indexString));
+				}
+				else
+				errorIndex.setText("Please provide a nonempty input");
 			}
 		});
 		btnNewButton_2.setBounds(561, 37, 147, 21);
 		panel.add(btnNewButton_2);
+		
+
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Inverted Index", null, panel_1, null);
@@ -151,6 +169,12 @@ public class MainFrame extends JFrame {
 		lblNewLabel_1.setBounds(10, 5, 640, 26);
 		panel_1.add(lblNewLabel_1);
 		
+		JLabel errorInverted = new JLabel("");
+		errorInverted.setForeground(Color.RED);
+		errorInverted.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		errorInverted.setBounds(10, 70, 200, 13);
+		panel_1.add(errorInverted);
+
 		JButton btnSearchWithInverted = new JButton("Boolean Retrieval"); //Inv Index
 		btnSearchWithInverted.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,7 +200,12 @@ public class MainFrame extends JFrame {
 		JButton btnRankedRetrieval_1 = new JButton("Ranked Retrieval"); //Inv Index
 		btnRankedRetrieval_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textArea_1.setText(r.rank(textField_1.getText().toLowerCase(),ranking.structure.invertedIndex));
+				String InvindexString = textField_1.getText().toLowerCase().trim();
+				if(!InvindexString.isBlank()){
+					textArea_1.setText(r.rank(InvindexString, ranking.structure.invertedIndex));
+				}
+				else
+				errorInverted.setText("Please provide a nonempty input");
 			}
 		});
 		btnRankedRetrieval_1.setBounds(417, 40, 147, 21);
@@ -185,11 +214,18 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_2_1 = new JButton("Single Term Search"); //Inv Index
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textArea_1.setText(ivner.search(textField_1.getText()));
+				String InvindexString = textField_1.getText().toLowerCase().trim();
+				if(!InvindexString.isBlank()){
+					textArea_1.setText(ivner.search(InvindexString));
+				}
+				else
+				errorInverted.setText("Please provide a nonempty input");
 			}
 		});
 		btnNewButton_2_1.setBounds(574, 40, 147, 21);
 		panel_1.add(btnNewButton_2_1);
+		
+
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Inverted Index BST", null, panel_2, null);
@@ -206,17 +242,26 @@ public class MainFrame extends JFrame {
 		lblNewLabel_1_1.setBounds(10, 10, 493, 26);
 		panel_2.add(lblNewLabel_1_1);
 		
+		JLabel errorBST = new JLabel("");
+		errorBST.setForeground(Color.RED);
+		errorBST.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		errorBST.setBounds(10, 67, 200, 13);
+		panel_2.add(errorBST);
+
+		JTextArea textArea_2 = new JTextArea(); //IIBST
+		textArea_2.setBounds(10, 91, 808, 335);
+		panel_2.add(textArea_2);
+
 		JButton btnSearchWithInverted_1 = new JButton("Boolean Retrieval"); //IIBST
 		btnSearchWithInverted_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnSearchWithInverted_1.setBounds(247, 37, 147, 21);
 		panel_2.add(btnSearchWithInverted_1);
 		
-		JTextArea textArea_2 = new JTextArea(); //IIBST
-		textArea_2.setBounds(10, 80, 808, 335);
-		panel_2.add(textArea_2);
+
 		
 		JButton btnNewButton_1_2 = new JButton("Clear All"); //IIBST
 		btnNewButton_1_2.addActionListener(new ActionListener() {
@@ -231,7 +276,12 @@ public class MainFrame extends JFrame {
 		JButton btnRankedRetrieval_2 = new JButton("Ranked Retrieval"); //IIBST
 		btnRankedRetrieval_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textArea_2.setText(r.rank(textField_2.getText().toLowerCase(),ranking.structure.invertedIndexBST));
+				String BSTString = textField_2.getText().toLowerCase().trim();
+				if(!BSTString.isBlank()){
+					textArea_2.setText(r.rank(BSTString,ranking.structure.invertedIndexBST));
+				}
+				else
+				errorBST.setText("Please provide a nonempty input");
 			}
 		});
 		btnRankedRetrieval_2.setBounds(404, 37, 147, 21);
@@ -240,11 +290,18 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_2_2 = new JButton("Single Term Search"); //IIBST
 		btnNewButton_2_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textArea_2.setText(BST.search(textField_2.getText().toLowerCase()));
+				String BSTString = textField_2.getText().toLowerCase().trim();
+				if(!BSTString.isBlank()){
+					textArea_2.setText(BST.search(BSTString));
+				}
+				else
+				errorBST.setText("Please provide a nonempty input");
 			}
 		});
 		btnNewButton_2_2.setBounds(561, 37, 147, 21);
 		panel_2.add(btnNewButton_2_2);
+		
+
 		
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Hashing", null, panel_4, null);
@@ -260,11 +317,17 @@ public class MainFrame extends JFrame {
 		textField_4.setColumns(10);
 		textField_4.setBounds(10, 46, 227, 19);
 		panel_4.add(textField_4);
+		
+		JLabel errorHASHING = new JLabel("");
+		errorHASHING.setForeground(Color.RED);
+		errorHASHING.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		errorHASHING.setBounds(10, 75, 200, 13);
+		panel_4.add(errorHASHING);
 
 		JTextArea textArea_4 = new JTextArea();
 		textArea_4.setBounds(10, 91, 808, 335);
 		panel_4.add(textArea_4);
-		
+
 		JButton btnNewButton_3 = new JButton("Boolean Retrieval"); //HASHING
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -276,8 +339,12 @@ public class MainFrame extends JFrame {
 		JButton btnRankedRetrieval_3 = new JButton("Ranked Retrieval"); //HASHING
 		btnRankedRetrieval_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					textArea_4.setText(r.rank(textField_4.getText().toLowerCase(),ranking.structure.hashMap));
-				
+				String HString = textField_4.getText().toLowerCase().trim();
+				if(!HString.isBlank()){
+					textArea_4.setText(r.rank(HString,ranking.structure.hashMap));
+				}
+				else
+				errorHASHING.setText("Please provide a nonempty input");
 			}
 		});
 		btnRankedRetrieval_3.setBounds(419, 45, 147, 21);
@@ -299,10 +366,17 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_2_3 = new JButton("Single Term Search"); //HASHING
 		btnNewButton_2_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                textArea_4.setText(hash.search(textField_4.getText().toLowerCase()));
+				String HString = textField_4.getText().toLowerCase().trim();
+				if(!HString.isBlank()){
+					textArea_4.setText(hash.search(HString));
+				}
+				else
+				errorHASHING.setText("Please provide a nonempty input");
 			}
 		});
 		btnNewButton_2_3.setBounds(576, 45, 147, 21);
 		panel_4.add(btnNewButton_2_3);
+		
+
 	}
 }
