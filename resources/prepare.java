@@ -12,7 +12,7 @@ public class prepare {
   }
 
   public void fillStop() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\96650\\Project-CS212\\data\\stop.txt"));
+    BufferedReader reader = new BufferedReader(new FileReader("data\\stop.txt"));
     LinkedList<String> words = new LinkedList<>();
 
     char ch = 'a';
@@ -56,7 +56,7 @@ public class prepare {
 
   public String[] filterDocs() throws IOException {
 
-    BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\96650\\Project-CS212\\data\\dataset.csv"));
+    BufferedReader reader = new BufferedReader(new FileReader("data\\dataset.csv"));
     reader.readLine();
     String doc[] = new String[numOfFile];
 

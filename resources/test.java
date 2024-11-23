@@ -80,7 +80,10 @@ public class test {
     System.err.println(hash.search("sports"));
 
     System.out.println(hash.search("x"));
-    System.out.println(r.rank("business a world market" ,ranking.structure.hashMap));
-
+    System.out.println(r.rank("  business a   world market 3" ,ranking.structure.index));
+    System.out.println(r.rank("  business a   world market 3" ,ranking.structure.invertedIndex));
+    System.out.println(r.rank("  business a   world market 3" ,ranking.structure.invertedIndexBST));
+    System.out.println(r.rank("  business a   world market 3" ,ranking.structure.hashMap));
+    
   }
 }
