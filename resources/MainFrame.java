@@ -3,6 +3,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
@@ -80,6 +82,8 @@ public class MainFrame extends JFrame {
 
 	ranking r = new ranking(ind, ivner, BST, hash);
 
+	Querys querys = new Querys(ind, ivner, BST, hash);
+
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Index", null, panel, null);
 		panel.setLayout(null);
@@ -101,18 +105,27 @@ public class MainFrame extends JFrame {
 		errorIndex.setBounds(10, 67, 200, 13);
 		panel.add(errorIndex);
 
+		JTextArea textArea = new JTextArea(); //Index
+		textArea.setBounds(10, 91, 808, 335);
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 12)); 
+		panel.add(textArea);
+		
+
 		JButton btnNewButton = new JButton("Boolean Retrieval"); //Index
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String indexString = textField.getText().toLowerCase().trim();
+				if(!indexString.isBlank()){
+					textArea.setText(querys.Query(indexString, Querys.structure.index));
+				}
+				else
+				errorIndex.setText("Please provide nonempty input");
 			}
 		});
 		btnNewButton.setBounds(247, 37, 147, 21);
 		panel.add(btnNewButton);
 		
-		JTextArea textArea = new JTextArea(); //Index
-		textArea.setBounds(10, 91, 808, 335);
-		panel.add(textArea);
-		
+
 		JButton btnNewButton_1 = new JButton("Clear All"); //Index
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -175,17 +188,26 @@ public class MainFrame extends JFrame {
 		errorInverted.setBounds(10, 70, 200, 13);
 		panel_1.add(errorInverted);
 
+		JTextArea textArea_1 = new JTextArea(); //Inv Index
+		textArea_1.setBounds(10, 91, 808, 335);
+		textArea_1.setFont(new Font("Monospaced", Font.PLAIN, 12)); 
+		panel_1.add(textArea_1);
+
 		JButton btnSearchWithInverted = new JButton("Boolean Retrieval"); //Inv Index
 		btnSearchWithInverted.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String qString = textField_1.getText().toLowerCase().trim();
+				if(!qString.isBlank()){
+					textArea_1.setText(querys.Query(qString, Querys.structure.invertedIndex));
+				}
+				else
+				errorInverted.setText("Please provide nonempty input");
 			}
 		});
 		btnSearchWithInverted.setBounds(243, 40, 164, 21);
 		panel_1.add(btnSearchWithInverted);
 		
-		JTextArea textArea_1 = new JTextArea(); //Inv Index
-		textArea_1.setBounds(10, 91, 808, 335);
-		panel_1.add(textArea_1);
+
 		
 		JButton btnNewButton_1_1 = new JButton("Clear All"); //Inv Index
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -250,11 +272,18 @@ public class MainFrame extends JFrame {
 
 		JTextArea textArea_2 = new JTextArea(); //IIBST
 		textArea_2.setBounds(10, 91, 808, 335);
+		textArea_2.setFont(new Font("Monospaced", Font.PLAIN, 12)); 
 		panel_2.add(textArea_2);
 
 		JButton btnSearchWithInverted_1 = new JButton("Boolean Retrieval"); //IIBST
 		btnSearchWithInverted_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String qString = textField_2.getText().toLowerCase().trim();
+				if(!qString.isBlank()){
+					textArea_2.setText(querys.Query(qString, Querys.structure.invertedIndexBST));
+				}
+				else
+				errorBST.setText("Please provide nonempty input");
 				
 			}
 		});
@@ -326,11 +355,18 @@ public class MainFrame extends JFrame {
 
 		JTextArea textArea_4 = new JTextArea();
 		textArea_4.setBounds(10, 91, 808, 335);
+		textArea_4.setFont(new Font("Monospaced", Font.PLAIN, 12)); 
 		panel_4.add(textArea_4);
 
 		JButton btnNewButton_3 = new JButton("Boolean Retrieval"); //HASHING
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String qString = textField_4.getText().toLowerCase().trim();
+				if(!qString.isBlank()){
+					textArea_4.setText(querys.Query(qString, Querys.structure.hashMap));
+				}
+				else
+				errorHASHING.setText("Please provide nonempty input");
 			}
 		});
 		btnNewButton_3.setBounds(262, 46, 147, 21);
