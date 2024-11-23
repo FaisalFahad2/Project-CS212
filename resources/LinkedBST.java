@@ -124,7 +124,7 @@ public class LinkedBST<T> {
 	// test
 	void printTree() {
 		printTreeRec(root, 0);
-}
+	}
 
 	void printTreeRec(BSTNode<T> root, int level) {
 		if (root == null) {

@@ -35,8 +35,6 @@ public class test123 {
       System.err.println("supply: "+BST.search("supply"));
       System.err.println("accurate: "+BST.search("accurate"));
 
-      System.out.println(BST.Query(testt));
-
       System.out.println(aaa.Query(testt, Querys.structure.hashMap));
       
 //      System.err.println("shift: "+BST.search("shift"));

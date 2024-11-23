@@ -7,15 +7,22 @@ public class hashMap {
   }
 
   private int function(String word){
-    int index = word.charAt(0) - 97;
-    if(index < 0 || index > table.length - 1)
-      return table.length - 1;
-    return index;
+    try{
+      int index = word.charAt(0) - 97;
+      if(index < 0 || index > table.length - 1)
+        return table.length - 1;
+      return index;
+    }catch(StringIndexOutOfBoundsException e){
+      return -1;
+    }
+
   }
 
   public void insert(String word , String data){
     int index = function(word);
-    
+    if(index == -1)
+      return ;
+
     if(table[index] == null)
       table[index] = new LinkedBST<String>();
     if (!table[index].insert(word, data))
@@ -36,6 +43,9 @@ public class hashMap {
 
   public String search(String word) {
     int index = function(word);
+    if(index == -1)
+      return "Not found";
+
     if (table[index].findKey(word)){
       String docs[] = table[index].retrieve().split(" ");
       String result = "";
@@ -50,6 +60,9 @@ public class hashMap {
 
   public String searchWithDuplicated(String word) {
     int index = function(word);
+    if (index == -1)
+      return "Not found";
+      
     if (table[index].findKey(word))
       return table[index].retrieve();
 

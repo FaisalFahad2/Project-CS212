@@ -19,28 +19,14 @@ public class ranking {
     this.hashMap = hashMap;
   }
 
+  
   public String rank(String str , structure s){
     String words[] = str.split(" ");
     LinkedPQ<String> sorted = new LinkedPQ<String>();
 
     for(int i = 0; i < words.length; i++){
-      String tmp = "" ;
-      
-      switch (s) {
-        case index:
-          tmp = index.searchWithDuplicated(words[i]);
-          break;
-        case invertedIndex:
-          tmp = invertedIndex.searchWithDuplicated(words[i]);
-          break;
-        case invertedIndexBST:
-          tmp = invertedIndexBST.searchWithDuplicated(words[i]);
-          break;
-        case hashMap:
-          tmp = hashMap.searchWithDuplicated(words[i]);
-          break;
-          
-      }
+
+      String tmp = search(words[i], s);
 
       if(tmp == "Not found")
         continue;
@@ -73,5 +59,24 @@ public class ranking {
         flag = true;
     }
     return result.toString();
+  }
+
+  public String search(String str , structure s){
+    String tmp = "";
+    switch (s) {
+      case index:
+        tmp = index.searchWithDuplicated(str);
+        break;
+      case invertedIndex:
+        tmp = invertedIndex.searchWithDuplicated(str);
+        break;
+      case invertedIndexBST:
+        tmp = invertedIndexBST.searchWithDuplicated(str);
+        break;
+      case hashMap:
+        tmp = hashMap.searchWithDuplicated(str);
+        break;
+    }
+    return tmp;
   }
 }
