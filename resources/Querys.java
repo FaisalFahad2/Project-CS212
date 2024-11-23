@@ -18,6 +18,7 @@ public class Querys {
     }
 
     private String searchByStructure(String term, structure s) {
+    	
         switch (s) {
             case index:
                 return index.search(term.trim());
@@ -33,8 +34,8 @@ public class Querys {
     }
 
     private String and(String a, String b, structure s) {
-        String strA = searchByStructure(a, s);
-        String strB = searchByStructure(b, s);
+        String strA = a;
+        String strB = b;
 
         if (strA.equalsIgnoreCase("Not found") || strB.equalsIgnoreCase("Not found"))
             return "Not found";
@@ -125,17 +126,22 @@ public class Querys {
     public String Query(String k, structure s) {
         String[] splitOr = k.split("\\b" + "or" + "\\b");
         String orAll = "";
-        
         for (int i = 0; i < splitOr.length; i++) {
             String[] splitAnd = splitOr[i].split("\\b" + "and" + "\\b");
             
             if (1 < splitAnd.length) {
                 String temp = "";
                 for (int j = 0; j < splitAnd.length; j++) {
+                	// search and store
                     if (j == 0)
-                        temp = splitAnd[j];
-                    else
-                        temp = and(temp, splitAnd[j], s);
+                        temp =  searchByStructure(splitAnd[j].trim(), s);
+                   
+                    // and with search
+                    else 
+                        temp = and(temp, searchByStructure(splitAnd[j].trim(), s), s);
+                    
+                   
+                    
                 }
                 splitOr[i] = temp.trim();
             } else {
